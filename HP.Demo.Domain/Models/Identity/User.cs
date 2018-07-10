@@ -23,7 +23,7 @@ namespace HP.Demo.Domain.Models.Identity
         public User(string email, IPassword password)
             : this()
         {
-            if (email.IsNullOrWhiteSpace())
+            if (String.IsNullOrWhiteSpace(email))
                 throw new ArgumentException(nameof(email));
             if (password == null)
                 throw new ArgumentNullException(nameof(password));
@@ -43,7 +43,7 @@ namespace HP.Demo.Domain.Models.Identity
 
         public void UpdateEmail(string email)
         {
-            if (email.IsNullOrWhiteSpace())
+            if (String.IsNullOrWhiteSpace(email))
                 throw new ArgumentException(nameof(email));
 
             Email = email;

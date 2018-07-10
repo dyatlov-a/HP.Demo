@@ -18,7 +18,7 @@ namespace HP.Demo.Domain.Models.Identity
         public Group(string name, GroupType groupType, Functional functionals)
             : this()
         {
-            if (name.IsNullOrWhiteSpace())
+            if (String.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
 
             Name = name;

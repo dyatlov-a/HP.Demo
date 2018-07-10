@@ -17,13 +17,13 @@ namespace HP.Demo.Web.Controllers
             _groupService = groupService ?? throw new ArgumentNullException(nameof(groupService));
         }
 
-        [HttpPatch("{userId}/AddToAdmin"), FunctionalAuthorizeFilter(Functional.UserAddToGroup)]
+        [HttpPut("{userId}/AddToAdmin"), FunctionalAuthorizeFilter(Functional.UserAddToGroup)]
         public async Task AddToAdmin(Guid userId)
         {
             await _groupService.AddToAdminAsync(userId);
         }
 
-        [HttpPatch("{userId}/RemoveFromAdmin"), FunctionalAuthorizeFilter(Functional.UserRemoveFromGroup)]
+        [HttpPut("{userId}/RemoveFromAdmin"), FunctionalAuthorizeFilter(Functional.UserRemoveFromGroup)]
         public async Task RemoveFromAdmin(Guid userId)
         {
             await _groupService.RemoveFromAdminAsync(userId);
