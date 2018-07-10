@@ -9,8 +9,7 @@ namespace HP.Demo.Web.Infrastructure
         public UsersReadProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<Group, GroupDto>()
-                .ForMember(p => p.IsCustom, p => p.MapFrom(e => e.GroupType == GroupType.Custom));
+            CreateMap<Group, GroupDto>();
         }
     }
 }

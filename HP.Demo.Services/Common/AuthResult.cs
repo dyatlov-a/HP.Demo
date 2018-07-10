@@ -30,6 +30,8 @@ namespace HP.Demo.Services.Common
         {
             if (claims == null)
                 throw new ArgumentNullException(nameof(claims));
+            if (String.IsNullOrWhiteSpace(token))
+                throw new ArgumentException(nameof(token));
 
             return new AuthResult(true, claims, token);
         }
