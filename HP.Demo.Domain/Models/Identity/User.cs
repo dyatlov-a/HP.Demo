@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HP.Demo.Domain.DataContracts;
-using HP.Demo.Domain.Extensions;
 
 namespace HP.Demo.Domain.Models.Identity
 {
@@ -12,12 +11,13 @@ namespace HP.Demo.Domain.Models.Identity
         public byte[] Salt { get; private set; }
         public byte[] Hash { get; private set; }
 
-        private ICollection<UserGroup> UserGroups { get; } = new List<UserGroup>();
+        private readonly ICollection<UserGroup> _userGroups;
 
-        public IEnumerable<Group> Groups => UserGroups.Select(ug => ug.Group);
+        public IEnumerable<Group> Groups => _userGroups.Select(ug => ug.Group);
 
         private User()
         {
+            _userGroups = new HashSet<UserGroup>();
         }
 
         public User(string email, IPassword password)
@@ -57,7 +57,7 @@ namespace HP.Demo.Domain.Models.Identity
             if (Groups.Contains(group))
                 return;
 
-            UserGroups.Add(new UserGroup(group, this));
+            _userGroups.Add(new UserGroup(group, this));
         }
 
         public void RemoveGroupFromUser(Group group)
@@ -71,8 +71,8 @@ namespace HP.Demo.Domain.Models.Identity
             if (!Groups.Contains(group))
                 return;
 
-            var targetUserGroup = UserGroups.Single(ug => ug.Group.Id == group.Id);
-            UserGroups.Remove(targetUserGroup);
+            var targetUserGroup = _userGroups.Single(ug => ug.Group.Id == group.Id);
+            _userGroups.Remove(targetUserGroup);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace HP.Demo.DataAccess.Configurations
             builder.ToTable(TableName);
             builder.HasKey(ug => new { ug.UserId, ug.GroupId });
             builder.HasOne(ug => ug.Group).WithMany();
-            builder.HasOne(ug => ug.User).WithMany("UserGroups");
+            builder.HasOne(ug => ug.User).WithMany("_userGroups");
         }
     }
 }

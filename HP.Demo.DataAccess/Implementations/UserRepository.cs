@@ -19,7 +19,7 @@ namespace HP.Demo.DataAccess.Implementations
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        private IQueryable<User> Query => _context.Set<User>().Include("UserGroups.Group");
+        private IQueryable<User> Query => _context.Set<User>().Include("_userGroups.Group");
 
         public async Task<IEnumerable<User>> GetAllAsync(Specification<User> specification = null)
         {
